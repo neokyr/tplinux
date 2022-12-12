@@ -3,7 +3,7 @@
 #Get percentage of used inode on /dev/sda1 and put it in "usedinode"
 unode=$(df -i | grep '/dev/sda1' | tr -s " " | cut -d " " -f 5 | cut -d "%" -f 1)
 
-if (( $unode > 80 )) && [ $USER = "root" ]
+if (( $unode > 20 )) && [ $USER = "root" ]
 then
 	# Create archive dir if not exist
 	mkdir -p /var/log/exercice/archives/
