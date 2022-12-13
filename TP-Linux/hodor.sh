@@ -17,7 +17,9 @@ then
 	# Generate a new archive file and store its path
 	tarpath=$(mktemp -p /var/log/exercice/archives/ -t "archive.XXXXXXXXXX.tar")
 	# put everything in recent_log in a tar archive
-	tar -cf $tarpath /var/log/exercice/recent_logs/* && sudo rm -f /var/log/exercice/recent_logs/*
+	tar -cf $tarpath /var/log/exercice/recent_logs
+	# Remove all files from recent_logs
+	sudo rm -rf /var/log/exercice/recent_logs/
 	# Get number of open terminal
 	numterm=$(expr $(ls /dev/pts/ | wc -l) - 1)
 	for ((i=0 ; i<$numterm ; i++))
