@@ -12,8 +12,11 @@ then
 	do
 		#create a unique logfile and save its full path in "logfile"
 		logfile=$(mktemp -p $LOG_PATH)
-		#get 10 first bytes of /dev/random and put them in the logfile
-		head -c 10 /dev/random > $logfile
+		# get 10 first bytes of /dev/random and put them in the logfile
+		#head -c 10 /dev/random > $logfile
+		truncate -s 10 $logfile # -------> Fastest
+		#dd if=/dev/random of=$logfile bs=10 count=1 2> /dev/null
+		#mktemp -u -p / -t XXXXXXXXX > $logfile
 	done
 else
 	echo "Veuillez fournir un nombre positif en parametre et utiliser sudo"
